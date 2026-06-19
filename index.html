@@ -2,92 +2,79 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر النخبة | Luxury Store</title>
     <style>
-        :root { --gold: #c5a059; --dark: #1a1a1a; --light: #f4f4f4; }
-        body { font-family: 'Arial', sans-serif; background-color: var(--dark); color: white; margin: 0; }
-        header { padding: 40px; text-align: center; background: linear-gradient(to bottom, #000, #333); }
-        h1 { color: var(--gold); }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
-        .card { background: #252525; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #444; }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
-        .price { color: var(--gold); font-size: 1.2em; margin: 10px 0; display: block; }
-        .btn { background: var(--gold); color: black; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        :root {
+            --gold: #d4af37;
+            --dark: #0a0a0a;
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark); color: var(--text); margin: 0; padding: 0; }
+        
+        /* الترويسة */
+        header { padding: 80px 20px; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8'); background-size: cover; border-bottom: 3px solid var(--gold); }
+        h1 { font-size: 3em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
+        
+        /* الحاوية */
+        .container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 0 20px; }
+        
+        /* كرت المنتج */
+        .card { background: var(--glass); border: 1px solid #333; padding: 20px; border-radius: 15px; text-align: center; transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .price { color: var(--gold); font-size: 1.3em; font-weight: bold; display: block; margin: 10px 0; }
+        .btn { display: inline-block; background: var(--gold); color: black; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px; transition: 0.3s; }
+        .btn:hover { background: #fff; transform: scale(1.05); }
+
+        /* تذييل الصفحة */
+        footer { text-align: center; padding: 40px; color: #666; border-top: 1px solid #333; }
     </style>
 </head>
 <body>
-    <header><h1>متجر النخبة | Luxury Store</h1></header>
-    <div class="container">
-        <script>
-            const products = ["ساعة رولكس", "عطر فرنسي", "نظارات شمسية", "هاتف ذكي", "حذاء رياضي", "محفظة جلد", "سماعات بلوتوث", "سوار ذهبي", "كاميرا احترافية", "لابتوب فخم", "قلم توقيع", "جاكيت جلد", "عقد ألماس", "حقيبة سفر", "مصباح مكتبي", "كرسي قيمنق", "ماوس لاسلكي", "شاحن متنقل", "مكبر صوت", "خاتم فضة"];
-            for(let i=0; i<20; i++) {
-                document.write(`<div class="card">
-                    <img src="https://picsum.photos/300/200?random=${i}" alt="منتج">
-                    <h3>${products[i]}</h3>
-                    <span class="price">${(i+1)*50} ريال</span>
-                    <a href="#" class="btn">اطلب الآن</a>
-                </div>`);
-            }
-        </script>
-    </div>
+
+    <header>
+        <h1>متجر النخبة</h1>
+        <p>جودة لا تضاهى، وفخامة لا تُنسى</p>
+    </header>
+
+    <div class="container" id="product-container">
+        </div>
+
+    <footer>جميع الحقوق محفوظة © 2026</footer>
+
+    <script>
+        // هنا يمكنك إضافة رقم جوالك للواتساب
+        const MY_PHONE = "966500000000"; 
+        
+        const products = [
+            {name: "ساعة رولكس", price: "4900"}, {name: "عطر فرنسي", price: "350"},
+            {name: "نظارات شمسية", price: "800"}, {name: "هاتف ذكي", price: "3200"},
+            {name: "حذاء رياضي", price: "600"}, {name: "محفظة جلد", price: "250"},
+            {name: "سماعات بلوتوث", price: "700"}, {name: "سوار ذهبي", price: "1200"},
+            {name: "كاميرا احترافية", price: "4500"}, {name: "لابتوب فخم", price: "8000"},
+            {name: "قلم توقيع", price: "400"}, {name: "جاكيت جلد", price: "900"},
+            {name: "عقد ألماس", price: "5500"}, {name: "حقيبة سفر", price: "1100"},
+            {name: "مصباح مكتبي", price: "300"}, {name: "كرسي قيمنق", price: "1500"},
+            {name: "ماوس لاسلكي", price: "200"}, {name: "شاحن متنقل", price: "150"},
+            {name: "مكبر صوت", price: "500"}, {name: "خاتم فضة", price: "450"}
+        ];
+
+        const container = document.getElementById('product-container');
+
+        products.forEach((p, i) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="https://picsum.photos/300/200?random=${i}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <span class="price">${p.price} ريال</span>
+                <a href="https://wa.me/${MY_PHONE}?text=مرحبا، أريد طلب: ${p.name}" class="btn" target="_blank">اطلب عبر واتساب</a>
+            `;
+            container.appendChild(card);
+        });
+    </script>
 </body>
 </html>
-/* تأثير الظهور */
-.card {
-    animation: fadeIn 1s ease-in;
-}
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}<a href="#" style="position:fixed; bottom:20px; right:20px; background:var(--gold); padding:10px; border-radius:50%; text-decoration:none; color:black;">▲</a>@media (max-width: 600px) {
-    .container { grid-template-columns: 1fr; } /* يخلي المنتج يأخذ كامل عرض الشاشة في الجوال */
-    header h1 { font-size: 1.5em; }
-}:root {
-    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* تدرج لوني ليلي فخم */
-    --accent-gold: #d4af37; /* اللون الذهبي */
-    --text-color: #ffffff;
-    --card-bg: rgba(255, 255, 255, 0.05); /* شفافية خفيفة للمنتجات */
-}
-
-body {
-    background: var(--bg-gradient); /* تطبيق التدرج اللوني على كامل الصفحة */
-    background-attachment: fixed;   /* يثبت الخلفية عند التصفح */
-    color: var(--text-color);
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-}
-
-header {
-    padding: 60px 20px;
-    text-align: center;
-    border-bottom: 2px solid var(--accent-gold);
-}
-
-header h1 {
-    font-size: 3em;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    color: var(--accent-gold);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-.card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px); /* تأثير ضبابي فخم للمنتج */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: 0.4s;
-}
-
-.card:hover {
-    border-color: var(--accent-gold);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-}body {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-}
-
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}}
