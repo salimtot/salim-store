@@ -2,63 +2,72 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>متجر النخبة الفاخر</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر النخبة - تسوق بالفخامة</title>
     <style>
-        :root { --gold: #d4af37; --dark: #0a0a0a; --text: #ffffff; }
-        body { font-family: sans-serif; background: var(--dark); color: var(--text); margin: 0; padding: 20px; }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #1a1a1a; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; animation: fadeInUp 0.8s ease forwards; }
-        .card img { width: 100%; border-radius: 10px; }
-        .price { color: var(--gold); font-size: 1.2em; font-weight: bold; display: block; margin: 10px 0; }
-        select, input { width: 100%; padding: 8px; margin: 5px 0; border-radius: 5px; }
-        .btn { background: var(--gold); color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        header { text-align: center; margin-bottom: 40px; }
-        h1 { color: var(--gold); animation: pulse 3s infinite; }
-        @keyframes pulse { 0% { text-shadow: 0 0 5px var(--gold); } 50% { text-shadow: 0 0 20px var(--gold); } 100% { text-shadow: 0 0 5px var(--gold); } }
+        :root { --gold: #d4af37; --bg: #050505; --card-bg: rgba(255, 255, 255, 0.05); }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; }
+        
+        /* تصميم الواجهة الفخمة */
+        header { padding: 50px 20px; text-align: center; background: linear-gradient(to bottom, #1a1a1a, #050505); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px; }
+        
+        .product-card { background: var(--card-bg); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; border: 1px solid #333; transition: 0.4s; }
+        .product-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        
+        .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .price { color: var(--gold); font-size: 1.5em; font-weight: bold; }
+        
+        .btn-order { background: var(--gold); border: none; padding: 15px; width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1em; margin-top: 15px; }
+        
+        /* إضافة تفاصيل تقنية (قسم الوصف) */
+        .details { font-size: 0.9em; color: #ccc; margin: 10px 0; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>متجر النخبة</h1>
-        <p>اختر منتجك، حدد مواصفاتك، واطلب مباشرة عبر الواتساب</p>
-    </header>
+<header>
+    <h1>متجر النخبة | الفخامة بين يديك</h1>
+    <p>أرقى الساعات، العطور، والاكسسوارات</p>
+</header>
 
-    <div class="container" id="product-container"></div>
+<div class="grid" id="main-shop"></div>
 
-    <script>
-        const products = [
-            {name: "ساعة رولكس", price: "4900"}, {name: "عطر فرنسي", price: "350"},
-            {name: "نظارات شمسية", price: "800"}, {name: "هاتف ذكي", price: "3200"}
-        ];
+<script>
+    // قاعدة بيانات المنتجات الموسعة
+    const storeItems = [
+        { name: "ساعة رولكس ذهبية", price: "4900", desc: "ساعة فاخرة بطلاء ذهبي عيار 24، مقاومة للماء والخدش." },
+        { name: "عطر النخبة الخاص", price: "450", desc: "تركيبة عطرية فرنسية حصرية تدوم لأكثر من 24 ساعة." },
+        { name: "نظارات شمسية كلاسيك", price: "900", desc: "تصميم إيطالي عصري مع حماية كاملة من الأشعة فوق البنفسجية." },
+        { name: "قلم فاخر", price: "250", desc: "قلم بتصميم ملكي، مثالي للهدايا الراقية والاجتماعات الهامة." }
+    ];
 
-        const container = document.getElementById('product-container');
+    const shop = document.getElementById('main-shop');
 
-        products.forEach((p, i) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="https://picsum.photos/300/200?random=${i}" alt="${p.name}">
-                <h3>${p.name}</h3>
-                <span class="price">${p.price} ريال</span>
-                <label>اللون:</label>
-                <select id="color-${i}"><option>أسود</option><option>ذهبي</option><option>فضي</option></select>
-                <label>الكمية:</label>
-                <input type="number" id="qty-${i}" value="1" min="1">
-                <button class="btn" onclick="orderProduct(${i})">اطلب عبر واتساب</button>
-            `;
-            container.appendChild(card);
-        });
+    storeItems.forEach((item, index) => {
+        shop.innerHTML += `
+            <div class="product-card">
+                <img src="https://picsum.photos/400/300?random=${index}" class="product-img">
+                <h2>${item.name}</h2>
+                <p class="details">${item.desc}</p>
+                <span class="price">${item.price} ريال</span>
+                <div style="margin-top:15px;">
+                    <select id="color-${index}">
+                        <option>ذهبي</option><option>أسود</option><option>فضي</option>
+                    </select>
+                </div>
+                <button class="btn-order" onclick="sendWhatsApp(${index})">إتمام الطلب عبر الواتساب</button>
+            </div>
+        `;
+    });
 
-        function orderProduct(i) {
-            const product = products[i];
-            const color = document.getElementById(`color-${i}`).value;
-            const qty = document.getElementById(`qty-${i}`).value;
-            const phone = "96877273398";
-            const msg = `مرحباً، أريد طلب: ${product.name}%0Aاللون: ${color}%0Aالكمية: ${qty}`;
-            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-        }
-    </script>
+    function sendWhatsApp(i) {
+        const item = storeItems[i];
+        const color = document.getElementById(`color-${i}`).value;
+        const phone = "96877273398";
+        window.location.href = `https://wa.me/${phone}?text=أريد طلب: ${item.name} - اللون: ${color}`;
+    }
+</script>
+
 </body>
 </html>
