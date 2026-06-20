@@ -1,4 +1,45 @@
-<!DOCTYPE html>
+/* 1. حركة الظهور للمنتجات (تظهر المنتجات واحداً تلو الآخر) */
+.card {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. تأثير لمعة الأزرار عند مرور الماوس */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px var(--gold);
+    transform: scale(1.05);
+}
+
+/* 3. تأثير "نبض" خفيف لعنوان الموقع (يخطف الأنظار) */
+header h1 {
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px var(--gold); }
+    50% { text-shadow: 0 0 20px var(--gold); }
+    100% { text-shadow: 0 0 5px var(--gold); }
+}
+
+/* 4. تحسين شكل الصور (تأثير الزوم الهادئ) */
+.card img {
+    transition: transform 0.5s ease;
+}
+.card:hover img {
+    transform: scale(1.1);
+}<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
